@@ -5,13 +5,13 @@ export type LetterProp = {
 
 export default function Letter({ letter, guess }: LetterProp) {
     const classMap = {
-        0: "border outline-[#3a3a3c]",
+        0: "bg-[#121213] border-[2px] border-[#3a3a3c]",
         1: "bg-[#3a3a3c]",
         2: "bg-[#b59f3b]", 
         3: "bg-[#538d4e]"
     }
     return (
-        <div className={`bg-[#3a3a3c] w-[62px] h-[62px] flex items-center justify-center text=[1em] font-bold text-[#fff] m-[2px] ${classMap[guess]}`}>
+        <div className={`w-[62px] h-[62px] flex items-center justify-center font-bold text-[1.8em] text-[#fff] m-[5px] ${classMap[guess]}`}>
             { letter }
         </div>
     );
