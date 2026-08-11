@@ -10,6 +10,7 @@ export default function Letter({ letter, guess }: LetterProp) {
         2: "bg-[#b59f3b]", 
         3: "bg-[#538d4e]"
     }
+    
     return (
         <div className={`w-[62px] h-[62px] flex items-center justify-center font-bold text-[1.8em] text-[#fff] m-[5px] ${classMap[guess]}`}>
             { letter }

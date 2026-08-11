@@ -34,19 +34,6 @@ export default function App() {
       });
   }
 
-  // function checkIfWord(word: string) {
-  //   checkWord(word).then((valid) => {
-  //     if(valid) {
-  //       invalidWord = false;
-  //     } else {
-  //       invalidWord = true;
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.error("Failed to check word", error)
-  //   })
-  // }
-
   useEffect(() => {
     fetchNewWord();
   }, []);
@@ -200,7 +187,7 @@ export default function App() {
 
   return (
     <>
-      <h1 className="text-[3em] m-[1em] flex items-center justify-center">
+      <h1 className="text-[3em] font-bold m-[1em] flex items-center justify-center">
         WORDLE
       </h1>
       <main className="bg-[#121213] h-full w-full flex flex-col items-center">
