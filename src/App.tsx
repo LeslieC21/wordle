@@ -22,6 +22,7 @@ export default function App() {
   const [guessLetterCount, setLetterCount] = useState(0);
   const [gameOver, setPlayerWon] = useState({ gameOver: false, won: true });
   const keyboardRef = useRef<KeyboardRef>(null);
+  const encodedWord: string = btoa(selectedWord);
 
   function fetchNewWord() {
     getWord()
@@ -125,7 +126,10 @@ export default function App() {
 
   function keySelected(key: string) {
     const isLetter = /^[a-zA-Z]$/.test(key);
-    if (isLetter) {
+    const inputEle = document.getElementById("wordleInput") as HTMLInputElement;
+    const isFocused = (document.activeElement === inputEle);
+
+    if (isLetter && !isFocused) {
       setGameboard((prevGB) =>
         prevGB.map((row, rowIndex) =>
           rowIndex === guessCount
@@ -184,9 +188,30 @@ export default function App() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [guessCount, guessLetterCount, gameboard, selectedWord]);
+  
+  function uploadWordle() {
+    const inputEle = document.getElementById('wordleInput') as HTMLInputElement;
+    const encodedWord = inputEle.value;
+    const decodedWord = atob(encodedWord);
+
+    setWord(decodedWord);
+    setGuessCount(0);
+    setLetterCount(0);
+    setPlayerWon({ gameOver: false, won: false });
+    setGameboard(createGameBoard());
+    keyboardRef.current?.playAgain();
+    console.log(selectedWord);
+
+    inputEle.value = "";
+  }
 
   return (
     <>
+    <div className="ml-[1em]">
+      <p>Upload Wordle:</p>
+      <input id="wordleInput" className="bg-[#3a3a3c] text=[1em] font-bold text-[#fff]"/>
+      <button onClick={ uploadWordle }>&#10004;</button>
+    </div>
       <h1 className="text-[3em] font-bold m-[1em] flex items-center justify-center">
         WORDLE
       </h1>
@@ -205,6 +230,8 @@ export default function App() {
             >
               Play Again
             </button>
+            <p>Want to share this wordle with your friends? Give them this code!</p>
+            <p>{ encodedWord }</p>
           </div>
         )}
       </main>
