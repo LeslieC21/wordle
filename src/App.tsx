@@ -35,9 +35,11 @@ export default function App() {
       });
   }
 
+
   useEffect(() => {
     fetchNewWord();
   }, []);
+
 
   function createGameBoard() {
     const gameboard: LetterProp[][] = Array.from(
@@ -50,6 +52,7 @@ export default function App() {
     );
     return gameboard;
   }
+
 
   function handleSubmit() {
     // Check if any letters are empty
@@ -124,6 +127,7 @@ export default function App() {
     }
   }
 
+
   function keySelected(key: string) {
     const isLetter = /^[a-zA-Z]$/.test(key);
     const inputEle = document.getElementById("wordleInput") as HTMLInputElement;
@@ -160,6 +164,7 @@ export default function App() {
     }
   }
 
+
   function playAgain() {
     fetchNewWord();
     setGuessCount(0);
@@ -169,9 +174,6 @@ export default function App() {
     keyboardRef.current?.playAgain();
   }
 
-  const rowElements = gameboard.map((word) => {
-    return <Word word={word} />;
-  });
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -189,7 +191,9 @@ export default function App() {
     };
   }, [guessCount, guessLetterCount, gameboard, selectedWord]);
   
+
   function uploadWordle() {
+    // Just convert to ASCII and back
     const inputEle = document.getElementById('wordleInput') as HTMLInputElement;
     const encodedWord = inputEle.value;
     const decodedWord = atob(encodedWord);
@@ -200,10 +204,13 @@ export default function App() {
     setPlayerWon({ gameOver: false, won: false });
     setGameboard(createGameBoard());
     keyboardRef.current?.playAgain();
-    console.log(selectedWord);
 
     inputEle.value = "";
   }
+
+  const rowElements = gameboard.map((word, i) => {
+    return <Word word={word} key={i}/>;
+  });
 
   return (
     <>

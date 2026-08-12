@@ -5,8 +5,8 @@ type WordProp = {
 }
 
 export default function Word({word}: WordProp) {
-    const letters = word.map(obj => {
-        return <Letter letter={obj.letter} guess={obj.guess}/>
+    const letters = word.map((obj, i) => {
+        return <Letter letter={obj.letter} guess={obj.guess} key={i}/>
     })
 
     return (

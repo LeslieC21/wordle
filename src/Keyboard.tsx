@@ -21,6 +21,7 @@ export const Keyboard = forwardRef<KeyboardRef, KeyboardProps>(({ onKeyDown }, r
     useEffect(() => {
     }, [keyStatus]);
 
+
     function selectKey(key: string) {
         if(key === "Bck")
             onKeyDown("Backspace")
@@ -28,9 +29,11 @@ export const Keyboard = forwardRef<KeyboardRef, KeyboardProps>(({ onKeyDown }, r
             onKeyDown(key);
     }
 
+
     function playAgain() {
         setKeyStatus(resetButtons());
     }
+
 
     function resetButtons(): Record<string, string> {
         const status: Record<string, string> = {};
@@ -41,6 +44,7 @@ export const Keyboard = forwardRef<KeyboardRef, KeyboardProps>(({ onKeyDown }, r
         return status;
     }
 
+
     function updateKeyGuesses(updates: Record<string, string>) {
         setKeyStatus((prevStatus) => {
             return {
@@ -50,6 +54,7 @@ export const Keyboard = forwardRef<KeyboardRef, KeyboardProps>(({ onKeyDown }, r
         });
     }
 
+    
     useImperativeHandle(ref, () => ({
         updateKeyGuess: updateKeyGuesses,
         playAgain: playAgain
